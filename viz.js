@@ -34,7 +34,8 @@ function setup() {
   textSize(15);
   
 
-  bell =createAudio(select('#belly'));
+  //bell =createAudio(select('#belly'));
+   bell = createAudio("sound/amb.mp3");
 
   console.log(bell);
 
@@ -70,7 +71,7 @@ function setup() {
   }
   
   w = width/N;
-  //bell.play();
+  bell.loop();
 
 }
 

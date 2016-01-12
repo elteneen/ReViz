@@ -16,14 +16,14 @@ var names = [];
 // temp. variables
 var today = 0, yesterday = 0;
 
-
 function preload(){
-  //bell = loadSound('moga.mp3');
+//bell = loadSound('amb.mp3');
 }
 
 function setup() {
+  
 
-  var myCanvas = createCanvas(0.8*windowWidth, windowHeight);
+  var myCanvas = createCanvas(0.8*windowWidth, windowHeight/2);
   myCanvas.parent("theCanvas");
 
   frameRate(2);
@@ -33,6 +33,10 @@ function setup() {
   textAlign(CENTER);
   textSize(15);
   
+
+  bell =createAudio(select('#belly'));
+
+  console.log(bell);
 
   // prepare data
 

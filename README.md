@@ -1,30 +1,32 @@
 # ReViz
-test dataViz 
 
-## Converting
+
+### Converting
 
 
 #### csv to json
 
-I use [link] (http://www.csvjson.com/csv2json)
+I use http://www.csvjson.com/csv2json
 
 
 #### 
 
 To convert to new json format 
 
-Go to [link] (https://github.com/elteneen/ReViz/convertdata.html)
+Go to http://elteneen.github.io/ReViz/convertdata.html
  
 
 To get the new data, open web console and
    
 **copy(days)**
 
-Example of output json: [link] (https://github.com/elteneen/ReViz/data/days.js)
+Example of output json: http://elteneen.github.io/ReViz/data/days.js
 
-## viz demo using p5js
 
-It's at [link] (https://github.com/elteneen/ReViz/)
+
+### Visualization using p5js
+
+It's at http://elteneen.github.io/ReViz/
 
 
 and the code in viz.js

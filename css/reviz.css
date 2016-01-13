@@ -1,0 +1,49 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+@font-face
+{
+font-family:'Amiri';
+src: url('fonts/Amiri-Regular.ttf') format('TrueType');
+}
+/*
+@font-face
+{
+font-family:'AmiriBold';
+src: url('fonts/Amiri-Bold.ttf') format('TrueType');
+}
+
+@font-face
+{
+font-family:'DroidNaskh';
+src: url('fonts/DroidNaskh-Regular.ttf') format('TrueType');
+}
+
+@font-face
+{
+font-family:'Lateef';
+src: url('fonts/LateefRegOT.ttf') format('TrueType');
+}
+
+@font-face
+{
+font-family:'ScheherazadeRegOT';
+src: url('fonts/ScheherazadeRegOT.ttf') format('TrueType');
+}
+*/
+
+#namesP{
+	text-align: center;
+	font-family:  'Amiri';
+	/* font-family: 'Lateef'; */
+	font-size: 1.5em;
+
+}
+
+#hint{
+	float:right;
+	text-align: right;
+}
+

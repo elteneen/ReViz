@@ -1,3 +1,9 @@
+
+/* always show scroll bar */
+html {
+    overflow-y:scroll; 
+}
+
 body {
   background-color: black;
   color: white;

@@ -8,8 +8,13 @@ var autoPlay = true;
 
 // fixed variables for data
 var N;
+<<<<<<< HEAD
+=======
+var nMax;
+var bell, vol = 0.5;
+>>>>>>> 99b8daea2412a94b0211aea37bd594b07aba8fd7
 var n = [], h =[];
-var w;
+var w, baseH;
 var d = [];
 var names = [];
 
@@ -26,6 +31,7 @@ var vol =0, soundOn = true;
 
 
 function preload(){
+<<<<<<< HEAD
 
 bell = createAudio('sound/SD.wav');
 
@@ -33,6 +39,13 @@ playIcn = loadImage("icns/play.png");
 muteIcn = loadImage("icns/mute.png");
 
 }
+=======
+  //bell =createAudio(select('#belly'));
+  
+  bell = createAudio("sound/SD.wav");
+  // console.log(bell);
+ }
+>>>>>>> 99b8daea2412a94b0211aea37bd594b07aba8fd7
 
 function setup() {
   
@@ -80,7 +93,11 @@ function setup() {
     }
   }
   
+<<<<<<< HEAD
   bell.loop();
+=======
+ bell.loop();
+>>>>>>> 99b8daea2412a94b0211aea37bd594b07aba8fd7
 
  namesP = select('#namesP');
  //console.log(namesP);
@@ -88,6 +105,9 @@ function setup() {
   
 
 }
+
+var namesP;
+var vol;
 
 
 
@@ -120,8 +140,11 @@ function draw() {
    
     // sound
     vol = map(n[today],0,nMax, 0.5, 1);
+<<<<<<< HEAD
     if(!soundOn){vol = 0;}
 
+=======
+>>>>>>> 99b8daea2412a94b0211aea37bd594b07aba8fd7
     bell.volume(vol);
     
     // write names to HTML
@@ -129,6 +152,7 @@ function draw() {
   }
 
   yesterday = today;
+<<<<<<< HEAD
 
 
   if(soundOn){
@@ -137,6 +161,8 @@ function draw() {
   else{
     image(muteIcn,width - 32, 0, 32,32 );
   }
+=======
+>>>>>>> 99b8daea2412a94b0211aea37bd594b07aba8fd7
   
 }
 

@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 
 /* always show scroll bar */
 html {
     overflow-y:scroll; 
 }
 
-=======
->>>>>>> 99b8daea2412a94b0211aea37bd594b07aba8fd7
 body {
   background-color: black;
   color: white;

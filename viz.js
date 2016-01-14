@@ -16,13 +16,11 @@ var names = [];
 var bell;
 var muteIcn, playIcn;
 
-
 ////
 // temp. variables
 var today = 0, yesterday = 0;
 var namesP;
 var vol =0, soundOn = true; 
-
 
 
 function preload(){

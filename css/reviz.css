@@ -55,3 +55,17 @@ src: url('fonts/ScheherazadeRegOT.ttf') format('TrueType');
 	text-align: right;
 }
 
+.personIcon{
+	width: 50%;
+	height: auto;
+}
+
+
+ul {
+  list-style: none; 
+  margin: 0 auto;
+  text-align: center;
+  font-family:  'Amiri';
+  font-size: 1.3em;
+}
+

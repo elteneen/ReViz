@@ -12,9 +12,11 @@ var n = [], h =[];
 var w;
 var d = [];
 var names = [];
+var row1 =[], row2 = [], row3 = [];
 
 var bell;
 var muteIcn, playIcn;
+var ribbon;
 
 ////
 // temp. variables
@@ -29,6 +31,7 @@ bell = createAudio('sound/SD.wav');
 
 playIcn = loadImage("icns/play.png");
 muteIcn = loadImage("icns/mute.png");
+ribbon = loadImage("images/ribbon.png");
 
 }
 
@@ -37,7 +40,7 @@ function setup() {
   var myCanvas = createCanvas(0.8*windowWidth, windowHeight/2);
   myCanvas.parent("theCanvas");
 
-  frameRate(2);
+  frameRate(1);
   
   rectMode(CORNERS);
   strokeWeight(0.4);
@@ -72,16 +75,42 @@ function setup() {
      d[i] += "Feb";
    }
 
-  names[i] = "";
-   for(var j = 0; j < n[i]; j++){
-      names[i] += days[i]['names'][j] + " - " ;
+   names[i] = "";
+   row1[i] = "<ul>";
+   row2[i] = "<ul>";
+   row3[i] = "<ul>";
+
+    for(var j = 0; j < n[i]; j++){
+      
+      names[i] += days[i]['names'][j] + " - " +"<img src='images/ribbon.png' >" ;
+      
+      if(j< n[i]/3) {
+        row3[i] += "<li> <img class='personIcon' src='images/ribbon.png' ><br/>" + days[i]['names'][j] +"<br/>";
+      } 
+      else if(j< 2*n[i]/3) {
+        row2[i] += "<li> <img class='personIcon' src='images/ribbon.png' ><br/>" + days[i]['names'][j] +"<br/>";
+      } 
+      else if(j< n[i]) {
+        row1[i] += "<li> <img class='personIcon' src='images/ribbon.png' ><br/>" + days[i]['names'][j] +"<br/>";
+      }
+
     }
+
+   row1[i] += "</ul> <br/><br/> ";
+   row2[i] += "</ul> <br/><br/> ";
+   row3[i] += "</ul> <br/><br/> ";
+  
   }
   
   bell.loop();
 
- namesP = select('#namesP');
- //console.log(namesP);
+  
+  divRow1 = select('#row1');
+  divRow2 = select('#row2');
+  divRow3 = select('#row3');
+
+  //namesP = select('#namesP');
+  //console.log(namesP);
 
   
 
@@ -123,7 +152,10 @@ function draw() {
     bell.volume(vol);
     
     // write names to HTML
-    namesP.html( names[today]); 
+    //namesP.html( names[today]); 
+    divRow1.html( row1[today] );
+    divRow2.html( row2[today] );
+    divRow3.html( row3[today] );
   }
 
   yesterday = today;

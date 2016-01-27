@@ -21,9 +21,11 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
-  
-  <link rel="stylesheet" href="css/jquery.modal.css">
   <link rel="stylesheet" href="css/reviz.css">
+
+  <link rel="stylesheet" href="css/imagelightbox.css">
+  <link rel="stylesheet" href="css/featherlight.css" >
+
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -37,7 +39,6 @@
   <script language="javascript" src="lib/p5.min.js"></script>
   <script language="javascript" src="lib/p5.dom.min.js"></script>
   <!--script language="javascript" src="lib/p5.sound.js"></script-->
- 
 
 
   
@@ -47,7 +48,7 @@
 
    <!-- THE DATA
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
- <script src="data/18days.min.js"></script> 
+ <script src="data/days.js"></script> 
 
 <!-- <audio controls>
 
@@ -57,43 +58,37 @@ Your browser does not support the audio element.
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
- <div id="theModal" style="display:none;">
-    <div id="overlayCard"> 
-        <!--<p>This is a test <a href="#" rel="modal:close">Close</a> or press ESC</p>-->  
-     </div>
-  </div>
-  
-
+ 
 
   <div class="container" >
    <div class="row" id="fixtotop">
      
-     <small id="hint"> 
-     
-     
-     <img src="images/Logo1.png" > 
+     <small id="hint"> click to pause / play and hover to select
      </small>
-     <br /><br /> 
-     <br />
-     <div id="info">
-      <a href="#theModal" rel="modal:open">  <img src="icns/info-s.png" /> </a>  عن المشروع
-     </div>
      <br/>
      
      <div id="theCanvas"></div>
-     
+
     </div>
 
-    <div class="row " id="nameRows">
-                
-
+    
+    <div class="row" id="nameRows">
+       
        <div class="one-third column" id="row1">1/3</div>
        <div class="one-third column" id="row2">2/3</div>
        <div class="one-third column" id="row3">3/3</div>
       <!-- <p id="namesP"> names</p> -->
 
     </div>  
- 
+
+    <div id="featherlightbox">
+      <div class="ajaxcontent lightbox" id="overlayCard">
+          nothing
+      </div>
+       <!-- <h2>This Ligthbox was loaded using ajax</h2>
+       <p>With <a href="https://github.com/noelboss/featherlight/#installation">little code</a>, you can build lightboxes that use custom content loaded with ajax...</p>
+        --> 
+    </div>
     
   </div>
 
@@ -102,12 +97,34 @@ Your browser does not support the audio element.
 
   <script language="javascript" src="viz.js"></script>
 
+
   <script src="lib/jquery.js"></script>
-  <script src="lib/jquery.modal.js" ></script>
+  <!--script src='lib/imagelightbox.js'></script>
+  <script src='lib/imagelightbox-options.js'></script-->
+  <script src="lib/featherlight.js"></script>
+
 
  
   <script>
 
+  
+
+    //$(document).ready(function(){
+
+      
+      //$('#nameRows').css('top', $(windowHeight/2.5));
+
+     // WITH ARROWS & ACTIVITY INDICATION
+
+     // var selectorG = 'a[data-imagelightbox="g"]';
+     // var instanceG = $( selectorG ).imageLightbox(
+     //  {
+     //   onStart:    function(){  overlayOn(); arrowsOn( instanceG, selectorG ); },
+     //   onEnd:      function(){  overlayOff(); arrowsOff(); activityIndicatorOff(); },
+     //   onLoadStart:  function(){ activityIndicatorOn(); },
+     //   onLoadEnd:    function(){ $( '.imagelightbox-arrow' ).css( 'display', 'block' ); activityIndicatorOff(); }
+     //  });
+    //});
   </script>
 
 

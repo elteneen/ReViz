@@ -13,18 +13,26 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
- 
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
 
- 
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
 </head>
 <body>
 
   <script src="lib/reqwest.min.js"></script>
   
+
+
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -55,30 +63,8 @@
   
   var newday = {
     "date": [],
-    "persons":[]
+    "names":[]
   };
-
-  // person :
-
-  // p[0] = name
-  // p[1] = photo
-
-  // p[2] = loc 
-  // p[3] = how 
-  // p[4] = job
-  // p[5] = age
-  // p[6] = social 
-  // p[7] = birthday 
-
-  // p[8] = profile 
-  // p[9] = video 
-  // p[10] = news
-
-  // p[11] = link1 
-  // p[12] = link2 
-  // p[13] = case 
-
-
 
   var n = days.length;
   
@@ -124,8 +110,6 @@
       
       n = days.length;
 
-      var p =[];
-
       if(i==0){
         days[0] = newday;
         days[0]['date'] = data[0]['date'].split('/').map(function (x) { return parseInt(x); }); 
@@ -142,7 +126,7 @@
           
           var newtoday = {
             "date": thatdate,
-            "persons":[]
+            "names":[]
            };
           days.push(newtoday);
 
@@ -151,29 +135,8 @@
           // but it somehow only works with assigning 'date' before pushing
           // days[n]['date'] = thatdate;
         }
-        
-        p =[];
 
-        p[0] = data[i]['name'];
-        p[1] = data[i]['photo'];
-
-        p[2] = data[i]['loc']; 
-        p[3] = data[i]['how']; 
-        p[4] = data[i]['job'];
-        p[5] = data[i]['age'];
-        p[6] = data[i]['social']; 
-        p[7] = data[i]['birthday']; 
-
-        p[8] = data[i]['profile']; 
-        p[9] = data[i]['video']; 
-        p[10] = data[i]['news'];
-
-        p[11] = data[i]['link1']; 
-        p[12] = data[i]['link2']; 
-        p[13] = data[i]['case']; 
-
-        days[days.length-1]['persons'].push(p);
-
+        days[days.length-1]['names'].push(data[i]['name']);
       }
       
       countData++;
@@ -198,7 +161,7 @@
    var ToPrint = "";
 
      for( i=0 ; i< days.length ; i++){
-        ToPrint += "Names for " + days[i]['date'] + " = " +  days[i]['persons'].length + "<br /> <br />";
+        ToPrint += "Names for " + days[i]['date'] + " = " +  days[i]['names'].length + "<br /> <br />";
     };
 
     //We add vPool HTML content to #myDIV
@@ -208,8 +171,7 @@
   }
 
   reqwest({
-    //url: './data/light18-order.js',
-    url: './data/18-full.js',
+    url: './data/light18-order.js',
     success: function (data) {
       parseData(data);
     }

@@ -2,42 +2,49 @@
 
 
 
-// Controls
-
-var autoPlay = true;
 
 // fixed variables for data
 var N;
 var n = [], h =[];
 var w;
 var d = [];
-var names = [];
 var row1 =[], row2 = [], row3 = [];
+//var names = [];
 
 var bell;
 var muteIcn, playIcn;
-var ribbon;
+var animateIcn, pauseIcn;
+//var amiriFont;
 
 ////
 // temp. variables
 var today = 0, yesterday = 0;
 var namesP;
-var vol =0, soundOn = true; 
+var vol =0, soundOn = true, animateOn = false;
+var divPerson, divOverlay;
 
+
+
+
+   
 
 function preload(){
 
-bell = createAudio('sound/SD.wav');
+bell = createAudio('sound/tahrir-metal-1.mp3');
 
 playIcn = loadImage("icns/play.png");
 muteIcn = loadImage("icns/mute.png");
-ribbon = loadImage("images/ribbon.png");
+
+animateIcn = loadImage("icns/animate.png");
+pauseIcn = loadImage("icns/dontanimate.png");
+
+ //amiriFont= loadFont("css/fonts/Amiri-Regular.ttf");
 
 }
 
 function setup() {
   
-  var myCanvas = createCanvas(0.8*windowWidth, windowHeight/2);
+  var myCanvas = createCanvas(0.8*windowWidth, windowHeight/2.5);
   myCanvas.parent("theCanvas");
 
   frameRate(1);
@@ -45,7 +52,8 @@ function setup() {
   rectMode(CORNERS);
   strokeWeight(0.4);
   textAlign(CENTER);
-  textSize(15);
+  textSize(16);
+  textFont("Amiri");
 
 
   // prepare data
@@ -53,47 +61,67 @@ function setup() {
   N = days.length; //console.log(N);
   
   w = width/N;
-  baseH = height/1.2;
+  baseH = height/1.1;
   
   nMax = 0;
   for (var i = 0; i < N; i++) {
-    if( n[i] = days[i]['names'].length > nMax){
-      nMax = days[i]['names'].length;
+    if( n[i] = days[i]['persons'].length > nMax){
+      nMax = days[i]['persons'].length;
+
     }
   }
 
+  var personid, personLi;
+
   for (var i = 0; i < N; i++) {
    
-   n[i] = days[i]['names'].length; 
+   n[i] = days[i]['persons'].length; 
    h[i] = map(n[i], 0, nMax, baseH, height/10);
-   d[i] = days[i]['date'][0] + " "; 
+ 
 
    if(days[i]['date'][1] == 1){
-    d[i] += "Jan";
+    d[i] =  " يناير " + days[i]['date'][0] ; 
    }
-   else{
-     d[i] += "Feb";
+   else {
+     d[i] = " فبراير " + days[i]['date'][0];
    }
-
-   names[i] = "";
+  
    row1[i] = "<ul>";
    row2[i] = "<ul>";
    row3[i] = "<ul>";
 
-    for(var j = 0; j < n[i]; j++){
-      
-      names[i] += days[i]['names'][j] + " - " +"<img src='images/ribbon.png' >" ;
-      
-      if(j< n[i]/3) {
-        row3[i] += "<li> <img class='personIcon' src='images/ribbon.png' ><br/>" + days[i]['names'][j] +"<br/>";
-      } 
-      else if(j< 2*n[i]/3) {
-        row2[i] += "<li> <img class='personIcon' src='images/ribbon.png' ><br/>" + days[i]['names'][j] +"<br/>";
-      } 
-      else if(j< n[i]) {
-        row1[i] += "<li> <img class='personIcon' src='images/ribbon.png' ><br/>" + days[i]['names'][j] +"<br/>";
-      }
+    var k = 0;
 
+    for(var j = 0; j < n[i]; j++){
+            
+     personid = 'day-' + String(i) + '-person-' +String(j);
+
+     personLi = '<li><div id="'+ personid+'"> <a href="#theModal" rel="modal:open">' 
+        + '<img class="personIcon" src="images/ribbon.png" ></a></div></li>'
+        + days[i]['persons'][j][0] 
+        +'<br/>';
+
+      //mobile
+      if( width < 500){
+          row2[i] += personLi;
+      }
+      // not mobile 
+      else
+      {
+        if(k==1 || n[i] < 2) { //center
+          row2[i] += personLi;
+          k=2;
+        } 
+        else if(k==0) {        //right
+          row3[i] += personLi;
+          k=1;
+        } 
+        else if(k==2) {        //left
+          row1[i] += personLi;
+          k=0;
+        }
+      }
+    
     }
 
    row1[i] += "</ul> <br/><br/> ";
@@ -102,17 +130,12 @@ function setup() {
   
   }
   
-  bell.loop();
-
-  
   divRow1 = select('#row1');
   divRow2 = select('#row2');
   divRow3 = select('#row3');
 
-  //namesP = select('#namesP');
-  //console.log(namesP);
-
-  
+  //divOverlay = select('#overlayCard');
+  bell.loop();
 
 }
 
@@ -120,15 +143,22 @@ function setup() {
 
 function draw() { 
 
-  if(autoPlay){
+  if(animateOn){
     today = (today+1)%N;
   }
-  else if(mouseY <baseH) {
+  else if(mouseY <baseH ) {
     today = floor(map(mouseX, 0, width, 0, N));
   }
   
+  // begin on Jan 28
+  if(frameCount <3) {
+    today = 3;
+    soundOn = false;
+  }
+
+
   // new day
-  if( today != yesterday ){
+  if( today != yesterday || frameCount < 10){
     
     background(0);
     noStroke();
@@ -138,16 +168,18 @@ function draw() {
     }
    
     // highlight today 
+    stroke(255);
+    text( d[today], today*w + 0.5*w, baseH + 20);
     fill(255,0,0);
     stroke(255,0,0);
-    text( d[today], today*w + 0.5*w, baseH + 20);
-    text( n[today], today*w + 0.5*w, h[today] - 20);
+    text( n[today], today*w + 0.5*w, h[today] - 10);
     
     rect(today*w, baseH, (today+1)*w , h[today]);
    
     // sound
-    vol = map(n[today],0,nMax, 0.5, 1);
-    if(!soundOn){vol = 0;}
+    vol = map(n[today], 0,nMax, 0.1, 0.7);
+
+   if(!soundOn){ vol = 0; }
 
     bell.volume(vol);
     
@@ -156,23 +188,112 @@ function draw() {
     divRow1.html( row1[today] );
     divRow2.html( row2[today] );
     divRow3.html( row3[today] );
+
   }
 
   yesterday = today;
 
 
-  if(soundOn){
-    image(playIcn,width - 32, 0, 32,32 );
+  if(animateOn){
+    image(pauseIcn, 0, 32, 32, 32);
+    
+    if(soundOn){
+      image(playIcn, 0, 64, 32, 32);
+    }
+    else{
+      image(muteIcn, 0, 64, 32, 32);
+    }
   }
   else{
-    image(muteIcn,width - 32, 0, 32,32 );
+    image(animateIcn, 0, 32, 32, 32);
+    soundOn =false;
   }
+
   
 }
 
+var overlayH;
+
 function mouseReleased(){
-  autoPlay = !autoPlay;
-  if( mouseX > width-32 && mouseY < 32 ){
+  
+  $('div').click(function(evt){
+   var currentID = this.id;
+   
+   if(currentID.indexOf('info') > -1) {
+     
+        overlayH = '<br /><h3> كلام عن المشروع</h3>'
+        +' <p> حاجة عن 18 يوم <br/ > حاجة عن ويكي ثورة  <br/ >حاجة عن ينارجية </p><br /> <br />';
+   }
+   
+   else if(currentID.indexOf('day') > -1){
+
+     var j = parseInt( currentID.split('-')[3]);
+
+     var p = days[today]['persons'][j];
+
+      // p[0] = name
+      // p[1] = photo
+
+      // p[2] = loc 
+      // p[3] = how 
+      // p[4] = job
+      // p[5] = age
+      // p[6] = social 
+      // p[7] = birthday 
+
+      // p[8] = profile 
+      // p[9] = video 
+      // p[10] = news
+
+      // p[11] = link1 
+      // p[12] = link2 
+      // p[13] = case number
+
+     overlayH = '';
+
+     overlayH += '<img class="personPic" src="images/person.png" >' 
+              +  '<h4>'+ p[0] +'</h4>'  
+              + '<h6> استشهد في '+d[today];
+
+     if(p[3]!==0 && p[3]!=null){ overlayH +=  ' عن طريق  ' + p[3]; }
+
+     overlayH += '</h6> <div class="modalInfo"> <p>';
+
+     if(p[7]!==0 && p[7]!=null)  { overlayH +=  '<br /> تاريخ الميلاد :' + p[7]; }
+     if(p[5]!==0 && p[5]!=null)  { overlayH +=  '<br /> السن : ' + p[5]; }
+     if(p[6]!==0 && p[6]!=null)  { overlayH +=  '<br /> الحالة الاجتماعية : ' + p[6]; }
+     if(p[4]!==0 && p[4]!=null)  { overlayH +=  '<br /> الوظيفة :' + p[4]; }
+     if(p[13]!==0 && p[13]!=null){ overlayH += '<br /> محضر رقم :' + p[13]; }
+
+     overlayH += '<br /><br /> روابط : ';
+
+     if(p[8]!==0 && p[8]!=null)  { overlayH += '<a href="' + p[8]+ '" target="_blank"> بروافيل </a> ' ; }
+     if(p[9]!==0 && p[9]!=null)  { overlayH += '- <a href="'+ p[9]+ '" target="_blank"> فيديو </a> ' ; }
+     if(p[10]!==0 && p[10]!=null){ overlayH += '- <a href="' + p[8] + '" target="_blank"> خبر صحفي </a> ' ; }
+     if(p[11]!==0 && p[11]!=null){ overlayH += '- <a href="' + p[11]+ '" target="_blank">  تقرير توثيقي 1 </a> ' ; }
+     if(p[12]!==0 && p[12]!=null){ overlayH += '- <a href="' + p[12]+ '" target="_blank"> تقرير توثيقي 2 </a>' ; }
+     
+
+     overlayH += '</p> </div>';
+     }
+     
+
+     document.getElementById("overlayCard").innerHTML = overlayH;
+     //console.log(overlayH);
+
+   
+
+    
+  });
+
+  if( mouseX < 32 && mouseY > 32 && mouseY < 96){
+   if( mouseY < 64 ){
+    animateOn =!animateOn;
+    soundOn = true;
+   }
+   if(mouseY > 64 && animateOn){
     soundOn =!soundOn;
-  }
+   }
+ }
+
 }

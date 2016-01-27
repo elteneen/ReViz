@@ -8,7 +8,8 @@ html {
 
 body {
   background-color: black;
-  color: white;
+  color: #fff;
+  font-family:  'Amiri';
 }
 
 @font-face
@@ -42,6 +43,21 @@ src: url('fonts/ScheherazadeRegOT.ttf') format('TrueType');
 }
 */
 
+#fixtotop{
+	/*position: fixed;*/
+	top:0;
+	left:0 relative;
+	background-color: #000;
+}
+
+#info{
+  font-size: 1.5em;
+}
+
+#nameRows{
+	position: relative;
+}
+
 #namesP{
 	text-align: center;
 	font-family:  'Amiri';
@@ -58,6 +74,10 @@ src: url('fonts/ScheherazadeRegOT.ttf') format('TrueType');
 .personIcon{
 	width: 50%;
 	height: auto;
+	background-color: #000;
+	
+	c-webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease;
 }
 
 
@@ -69,3 +89,14 @@ ul {
   font-size: 1.3em;
 }
 
+/*
+.personIcon:hover {
+    width: 50%;
+	height: auto; 
+	content: url('../images/ribbon-with-rose.png'); 
+	/* looking for a smooth transition *
+} */
+
+.ajaxcontent{
+	display: none;
+}

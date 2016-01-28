@@ -44,7 +44,7 @@ pauseIcn = loadImage("icns/dontanimate.png");
 
 function setup() {
   
-  var myCanvas = createCanvas(0.8*windowWidth, windowHeight/2.5);
+  var myCanvas = createCanvas(0.8*windowWidth, windowHeight/2.25);
   myCanvas.parent("theCanvas");
 
   frameRate(1);
@@ -221,8 +221,13 @@ function mouseReleased(){
    
    if(currentID.indexOf('info') > -1) {
      
-        overlayH = '<br /><h3> كلام عن المشروع</h3>'
-        +' <p> حاجة عن 18 يوم <br/ > حاجة عن ويكي ثورة  <br/ >حاجة عن ينارجية </p><br /> <br />';
+        overlayH = '<div id="infotext"> <br /><h3> عن الصفحة</h3>'
+        +' <br /><p> عرض لبيانات شهداء مصر من 25 يناير  - 11 فبراير 2011 المعروف تاريخ وفاتهم <br/ ><br />'
+        +'تم توثيق البيانات من خلال مباردة <a href="https://wikithawra.wordpress.com/" target="_blank">ويكي ثورة</a>'
+        + ' ونعيد اتاحتها بشكل <a href="./data/18days.js" target="_blank"> ملف JSON </a><br/><br/>'
+        + 'وبرنامج الصفحة مفتوح <a href="https://github.com/elteneen/ReViz/tree/gh-pages" target="_blank"> المصدر </a>'
+        +'</p><br /></div>'; 
+
    }
    
    else if(currentID.indexOf('day') > -1){
@@ -255,23 +260,23 @@ function mouseReleased(){
               +  '<h4>'+ p[0] +'</h4>'  
               + '<h6> استشهد في '+d[today];
 
-     if(p[3]!==0 && p[3]!=null){ overlayH +=  ' عن طريق  ' + p[3]; }
+     if(p[3]!==0 && p[3]!=null && p[3]!=0){ overlayH +=  ' عن طريق  ' + p[3]; }
 
      overlayH += '</h6> <div class="modalInfo"> <p>';
 
-     if(p[7]!==0 && p[7]!=null)  { overlayH +=  '<br /> تاريخ الميلاد :' + p[7]; }
-     if(p[5]!==0 && p[5]!=null)  { overlayH +=  '<br /> السن : ' + p[5]; }
-     if(p[6]!==0 && p[6]!=null)  { overlayH +=  '<br /> الحالة الاجتماعية : ' + p[6]; }
-     if(p[4]!==0 && p[4]!=null)  { overlayH +=  '<br /> الوظيفة :' + p[4]; }
-     if(p[13]!==0 && p[13]!=null){ overlayH += '<br /> محضر رقم :' + p[13]; }
+     if(p[7]!==0 && p[7]!=null && p[7]!=0)   { overlayH +=  '<br /> تاريخ الميلاد :' + p[7]; }
+     if(p[5]!==0 && p[5]!=null && p[5]!=0)   { overlayH +=  '<br /> السن : ' + p[5]; }
+     if(p[6]!==0 && p[6]!=null && p[6]!=0)   { overlayH +=  '<br /> الحالة الاجتماعية : ' + p[6]; }
+     if(p[4]!==0 && p[4]!=null && p[4]!=0)   { overlayH +=  '<br /> الوظيفة :' + p[4]; }
+     if(p[13]!==0 && p[13]!=null && p[13]!=0){ overlayH += '<br /> محضر رقم :' + p[13]; }
 
      overlayH += '<br /><br /> روابط : ';
 
-     if(p[8]!==0 && p[8]!=null)  { overlayH += '<a href="' + p[8]+ '" target="_blank"> بروافيل </a> ' ; }
-     if(p[9]!==0 && p[9]!=null)  { overlayH += '- <a href="'+ p[9]+ '" target="_blank"> فيديو </a> ' ; }
-     if(p[10]!==0 && p[10]!=null){ overlayH += '- <a href="' + p[8] + '" target="_blank"> خبر صحفي </a> ' ; }
-     if(p[11]!==0 && p[11]!=null){ overlayH += '- <a href="' + p[11]+ '" target="_blank">  تقرير توثيقي 1 </a> ' ; }
-     if(p[12]!==0 && p[12]!=null){ overlayH += '- <a href="' + p[12]+ '" target="_blank"> تقرير توثيقي 2 </a>' ; }
+     if(p[8]!==0 && p[8]!=null && p[8]!=0)   { overlayH += '<a href="' + p[8]+ '" target="_blank"> بروافيل </a> ' ; }
+     if(p[9]!==0 && p[9]!=null && p[9]!=0)   { overlayH += '- <a href="'+ p[9]+ '" target="_blank"> فيديو </a> ' ; }
+     if(p[10]!==0 && p[10]!=null && p[10]!=0){ overlayH += '- <a href="' + p[10] + '" target="_blank"> خبر صحفي </a> ' ; }
+     if(p[11]!==0 && p[11]!=null && p[11]!=0){ overlayH += '- <a href="' + p[11]+ '" target="_blank">  تقرير توثيقي 1 </a> ' ; }
+     if(p[12]!==0 && p[12]!=null && p[12]!=0){ overlayH += '- <a href="' + p[12]+ '" target="_blank"> تقرير توثيقي 2 </a>' ; }
      
 
      overlayH += '</p> </div>';

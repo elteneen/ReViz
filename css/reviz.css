@@ -45,13 +45,25 @@ src: url('fonts/ScheherazadeRegOT.ttf') format('TrueType');
 
 #fixtotop{
 	/*position: fixed;*/
-	top:0;
+	padding-top: 1.5em;
 	left:0 relative;
 	background-color: #000;
 }
 
+#logoline{
+ border-bottom: 1px solid #fff;
+}
+
 #info{
   font-size: 1.5em;
+}
+
+#infotext p{
+  text-align: right;
+}
+
+#infotext h3{
+		text-align: center;
 }
 
 #nameRows{
@@ -89,14 +101,8 @@ ul {
   font-size: 1.3em;
 }
 
-/*
-.personIcon:hover {
-    width: 50%;
-	height: auto; 
-	content: url('../images/ribbon-with-rose.png'); 
-	/* looking for a smooth transition *
-} */
+img.centerImg{
+	display: block;
+	margin: 0 auto;
 
-.ajaxcontent{
-	display: none;
 }
